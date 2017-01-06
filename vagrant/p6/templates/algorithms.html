@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<div class="container">
+    <div class = 'flash'>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <strong> {{ message }} </strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <div class="page-header">
+        <figure class="creator">
+            <figcaption>Owned by: {{user.name}}</figcaption>
+        </figure>
+        <a href="{{url_for('editCategory', category_id=category.id)}}" style="text-decoration: none">
+            <h1 class="pull-left">{{category.name}}</h1>
+        </a>
+        <div class="clearfix"></div>
+    </div>
+    <div class = "row">
+        <div class="col-md-12">
+            <ul class="list-group">
+                {% for i in algorithms %}
+                    <a href="{{url_for('editAlgorithm', category_id=category.id, algorithms_id=i.id)}}" style="text-decoration: none" class="list-group-item">
+                        <h3 class="list-group-item-heading">
+                            {{i.name}}
+                        </h3>
+                    </a>
+                {% endfor %}
+                <a href="{{url_for('newAlgorithm', category_id=category.id)}}" style="text-decoration: none" class="list-group-item">
+                    <h5>Add Algorithm
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true">
+                        </span>
+                    </h5>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

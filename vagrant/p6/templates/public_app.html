@@ -1,0 +1,37 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<div class="container">
+    <div class="jumbotron">
+          <h1>Algorithms</h1>
+          <p>For the people, the craft.</p>
+    </div>
+
+    <div class = 'flash'>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <strong> {{ message }} </strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <br>
+
+    <div class = "row">
+        <div class="col-md-4">
+            <div class="list-group">
+                {% for category in categories %}
+                    <a href = "{{url_for('showAlgorithms', category_id = category.id)}}" style="text-decoration: none" class="list-group-item">
+                        <h3>{{category.name}}</h3>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
