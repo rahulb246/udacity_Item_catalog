@@ -66,7 +66,6 @@ class Algorithms(Base):
         return {
             'id': self.id,
             'name': self.name,
-            'description': self.description
         }
 
 engine = create_engine('sqlite:///algorithms.db')

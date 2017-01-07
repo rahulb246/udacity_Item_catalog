@@ -397,7 +397,7 @@ def JSONSingleAlgorithm(category_id, algorithm_id):
     """
     Return details of a single algorithm in JSON format
     """
-    algorithm = session.query(Clgorithms).filter_by(id=algorithm_id).one()
+    algorithm = session.query(Algorithms).filter_by(id=algorithm_id).one()
     return jsonify(Algorithm=algorithm.serialize)
 
 # Make XML endpoints available for all categories
@@ -430,7 +430,7 @@ def XMLAlgorithms(category_id):
 @app.route('/category/<int:category_id>/algorithms/<int:algorithms_id>/XML')
 def XMLAlgorithm(category_id, algorithms_id):
     """ Return details of a single algorithm in XML format """
-    algorithm = session.query(algorithms).filter_by(id=algorithms_id).one()
+    algorithm = session.query(Algorithms).filter_by(id=algorithms_id).one()
     data = dict2xml(algorithm.serialize, wrap="algorithm", indent="  ")
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + data
     response = make_response(xml)
